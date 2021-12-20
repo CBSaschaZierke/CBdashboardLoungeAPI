@@ -1,0 +1,22 @@
+version: '3'
+services:
+    web:
+        build: .
+        ports:
+            - "5000:5000"
+        volumes:
+            - .:/api
+        depends_on:
+            - redis
+        environment:
+            - cbnetwork=cbdashoard-db-mongo-1
+        networks:
+            - cbnetwork
+
+    redis:
+        image: redis
+
+
+networks:
+    cbnetwork:
+        external: true
